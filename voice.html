@@ -1,0 +1,292 @@
+
+<html>
+<head>
+<title>Sharif Covid-19 testing agency</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: "Montserrat";
+  font-size: 20px;
+}
+section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  background-color:#F08080;
+  flex-direction: column;
+  padding: 50px 0;
+}
+section h1{
+  color: black;
+  text-align: center;
+  width: 100%;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+section p {
+  text-align: center;
+  color: black;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.container {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: center;
+}
+.texts p {
+  color: black;
+  text-align: left;
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.texts p.replay {
+  text-align: right;
+}
+
+</style>
+</head>
+<body>
+ <section>
+   <h1>Welcome<br>Application Assistance</h1> 
+   <p>[please Cheak microphone for voice command]</p> 
+    <p>[please Refresh for deleting chat]</p>  
+		
+  <p> <i class="fa fa-microphone" style="font-size:100px;color:red""text-align:center";></i><b>Say......"Hello Sharif"</b></p>
+
+   <div class="container">
+     <div class="texts">
+     </div>
+   </div>
+ </section>
+
+ <script>
+
+const texts = document.querySelector(".texts");
+
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+
+let p = document.createElement("p");
+
+recognition.addEventListener("result", (e) => {
+  texts.appendChild(p);
+  const text = Array.from(e.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript)
+    .join("");
+
+  p.innerText = text;
+  if (e.results[0].isFinal) {
+    if (text.includes("how are you")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "I am fine and you?";
+      texts.appendChild(p);
+    }
+    if (
+      text.includes("what's your name") ||
+      text.includes("what is your name")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "My Name is Sharif hossain";
+      texts.appendChild(p);
+    }
+	  if (
+      text.includes("thank you") ||
+      text.includes("thank you")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "welcome!";
+      texts.appendChild(p);
+    }
+	  if (
+      text.includes("my body temperature is 100 degrees Fahrenheit") ||
+      text.includes("my body temperature is 100 degrees Fahrenheit")
+	 
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Please test covid-19.Your body temperature is high";
+      texts.appendChild(p);
+    }
+	  if (
+      text.includes("about covid-19") ||
+      text.includes("abouts covid-19")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.";
+
+      texts.appendChild(p);
+    }
+		  if (
+      text.includes("how many test type of covid-19 ") ||
+      text.includes("how many test type of covid-19")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Two type of testing,(1)Antigen (2)Rt-pcr.";
+
+      texts.appendChild(p);
+    }
+			  if (
+      text.includes("what is coronavirus ") ||
+      text.includes("what is coronavirus")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.";
+
+      texts.appendChild(p);
+    }
+				  if (
+      text.includes("who is your founder") ||
+      text.includes("who is your founder")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Sharif hossain";
+
+      texts.appendChild(p);
+    }
+					  if (
+      text.includes("application assistant") ||
+      text.includes("application assistant")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Please do not open two or more Application Assistance";
+
+      texts.appendChild(p);
+    }
+	if (
+      text.includes("my body temperature is 36") ||
+      text.includes("my body temperature is 36" )
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Yor temperature is high please Cheak covid-19";
+      texts.appendChild(p);
+    }
+    if (text.includes("test report")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = " Opening Search report";
+      texts.appendChild(p);
+      console.log("");
+      window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/patient-search-report.php");
+    }
+	if (text.includes("registration form")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = " Opening registration form";
+      texts.appendChild(p);
+      console.log("");
+      window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/new-user-testing.php");
+    }
+	if (text.includes("testing")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = " Opening testing";
+      texts.appendChild(p);
+      console.log("");
+      window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/new-user-testing.php");
+    }
+	if (text.includes("home")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = " Opening home ";
+      texts.appendChild(p);
+      console.log("");
+      window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/index.php");
+    }
+		if (text.includes("contact us")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = " Opening contact us ";
+      texts.appendChild(p);
+      console.log("");
+      window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/contact.php");
+    }
+			if (text.includes("district wise test")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = " Opening district wise test   ";
+      texts.appendChild(p);
+      console.log("");
+      window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/live-test-updates2.php");
+    }
+
+				if (text.includes("already registered user")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "opening already registered user ";
+      texts.appendChild(p);
+      console.log("");
+  	  window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/registered-user-testing.php");
+	  }
+
+	  		if (text.includes("covid-19 online test")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "opening covid-19 online test ";
+      texts.appendChild(p);
+      console.log("");
+  	  window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/question.php");
+	  }
+	    		if (text.includes("Bangladesh covid-19 update")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "opening Bangladesh covid-19 update ";
+      texts.appendChild(p);
+      console.log("");
+  	  window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/COVID-19_TRACKER_HTML_CSS_JAVASCRIPT-master/index.html");
+	  }
+	  	    		if (text.includes("world covid-19 update")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "opening world covid-19 update ";
+      texts.appendChild(p);
+      console.log("");
+  	  window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/codetube-master/covid19-map/covid-map.html");
+	  }
+	    	    		if (text.includes("symptom test")) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "opening  symptom test ";
+      texts.appendChild(p);
+      console.log("");
+  	  window.open("http://localhost/Covid19-TMS%20Project%20Using%20PHP%20and%20MySQL/covid-tms/question.php");
+	  }
+	  
+	   
+ p = document.createElement("p");
+ }
+});
+
+recognition.addEventListener("end", () => {
+  recognition.start();
+});
+
+recognition.start();
+
+ </script>
+ </body>
+ </html>

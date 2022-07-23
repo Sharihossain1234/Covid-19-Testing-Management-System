@@ -1,0 +1,1041 @@
+<?php session_start();
+//DB conncetion
+include_once('includes/config.php');
+//validating Session
+if (strlen($_SESSION['aid']==0)) {
+  header('location:logout.php');
+  } else{
+
+
+if(isset($_POST['submit'])){
+//getting post values
+$empid=$_POST['empid'];
+$fname=$_POST['fullname'];
+$mnumber=$_POST['mobilenumber'];
+$query="insert into tblphlebotomist(EmpID,FullName,MobileNumber) values('$empid','$fname','$mnumber')";
+$result =mysqli_query($con, $query);
+if ($result) {
+echo '<script>alert("Phlebotomist created successfully.")</script>';
+  echo "<script>window.location.href='add-phlebotomist.php'</script>";
+} 
+else {
+    echo "<script>alert('Something went wrong. Please try again.');</script>";  
+echo "<script>window.location.href='add-phlebotomist.php'</script>";
+}
+}
+?>
+<!DOCTYPE html>
+<html>
+    
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+ <meta charset="UTF-8" />
+    <title>Sun Healthcare-World Covid-19 Update</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+ <!-- Custom styles for this template-->
+     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+ <!-- Custom styles for this template-->
+     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<style>
+
+ 	 footer {
+	  background:#D84315;
+  }		
+body {
+   margin:0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+     background-color: #22475E;
+  scroll-behavior: smooth;
+}
+
+.card {
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
+
+#card1 {
+    display:none;
+}
+
+.card-header, .datadiv {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    color: #000;
+    background: #22475E;
+    background-repeat:no-repeat;
+    background-image:cover;
+    background-attachment:fixed;
+}
+
+.info {
+    margin-bottom: 10px;
+    color:#fff;
+    padding: 5px 0;
+    border-width: 1px;
+    border-radius: 15px;
+    box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+}
+
+.loader div {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: #ccc;
+  top: 45%;
+  padding-top:13px;
+  font-size:18px;
+  text-align:center;
+  border-radius: 50%;
+}
+
+.loader div:nth-child(1) {
+  background-color: #FF5460;
+  animation: move 2s infinite cubic-bezier(.2,.64,.81,.23);
+}
+.loader div:nth-child(2) {
+  background-color: #FF9D84;
+  animation: move 2s 150ms infinite cubic-bezier(.2,.64,.81,.23);
+}
+.loader div:nth-child(3) {
+  background-color: #F0E797;
+  animation: move 2s 300ms infinite cubic-bezier(.2,.64,.81,.23);
+}
+.loader div:nth-child(4) {
+  background-color: #75B08A;
+  animation: move 2s 450ms infinite cubic-bezier(.2,.64,.81,.23);
+}
+
+
+@keyframes move {
+  0% {left: 0%;}
+  100% {left:100%;}
+}
+
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.icon {
+    color:white;
+}
+
+.nameLink {
+    color: #000;
+}
+
+.text-white {
+    font-weight:bold;
+    font-size:20px;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 20px;
+}
+
+.active2, .collapsible:hover {
+  background-color: #555;
+}
+
+.collapsible:after {
+  /*content: '\002B';*/
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active2:after {
+  content: "\2212";
+}
+
+.content1 {
+  padding: 2px 8px;
+  max-height: 200px;
+  /*overflow: hidden;*/
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+  margin-bottom:7px;
+}
+
+.content1 span {
+    display:-moz-inline-block;
+    display:-moz-inline-box;
+    display:inline-block;
+    padding: 5px;
+    overflow:hidden; /* just in case a value goes out of bounds */
+    width:105px;
+    font:normal 15px/18px arial,helvetica,sans-serif;
+    position:relative;
+}
+
+.content1 p {
+    border-top-width:2px;
+    border-top-style: solid;
+    border-top-color: coral;
+    font:normal 15px/18px arial,helvetica,sans-serif;
+}
+
+#myInput {
+  background-image: url('https://www.w3schools.com/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  color: #000;
+  margin-top:10px;
+}
+
+.totalContent span {
+    display:-moz-inline-block;
+    display:-moz-inline-box;
+    display:inline-block;
+    padding: 10px 5px;
+    overflow:hidden; /* just in case a value goes out of bounds */
+    width:31%;
+    font:normal 13px/16px arial,helvetica,sans-serif;
+    position:relative;
+    background: #fff;
+}
+
+.totalContent1 span {
+    display:-moz-inline-block;
+    display:-moz-inline-box;
+    display:inline-block;
+    padding: 10px 5px;
+    overflow:hidden; /* just in case a value goes out of bounds */
+    width:100%;
+    font:normal 13px/16px arial,helvetica,sans-serif;
+    position:relative;
+    background: #fff;
+}
+
+#chartContainer, #chartContainer1, #chartContainer2 {
+    overflow-x:scroll;
+    overflow-y:hidden;
+}
+
+#top10 button {
+    width:100%;
+    margin-bottom: 5px;
+}
+
+.confirmed, .recovered {
+    border-right-width:2px;
+    border-right-style: solid;
+    border-right-color: coral;
+}
+
+.recovered, #totalRecovered {
+    color: green;
+}
+
+.death, #totalDeath {
+    color: red;
+}
+
+@media all and (max-width: 600px) {
+  .content1 span {
+        padding: 10px;
+        overflow:hidden; /* just in case a value goes out of bounds */
+        width:25%;
+        font:normal 12px/14px arial,helvetica,sans-serif;
+    }
+    
+    .content1 p {
+        padding: 3px;
+        overflow:hidden; /* just in case a value goes out of bounds */
+        font:normal 12px/14px arial,helvetica,sans-serif;
+    }
+    
+    .totalContent span {
+        padding: 10px 5px;
+        overflow:hidden; /* just in case a value goes out of bounds */
+        width:25%;
+        font:normal 12px/14px arial,helvetica,sans-serif;
+    }
+}
+
+@media all and (min-width: 600px) and (max-width: 768px) {
+  .content1 span {
+        padding: 10px;
+        overflow:hidden; /* just in case a value goes out of bounds */
+        width:25%;
+        font:normal 12px/14px arial,helvetica,sans-serif;
+    }
+    
+    .content1 p {
+        padding: 3px;
+        overflow:hidden; /* just in case a value goes out of bounds */
+        font:normal 12px/14px arial,helvetica,sans-serif;
+    }
+    
+    .totalContent span {
+        padding: 10px 5px;
+        overflow:hidden; /* just in case a value goes out of bounds */
+        width:25%;
+        font:normal 12px/14px arial,helvetica,sans-serif;
+    }
+}
+
+.model-body {
+    padding: 5px;
+}
+
+.model-body ul li {
+    list-style-type: none;
+    padding:5px;
+}
+
+.model-body li:nth-child(odd):before{
+  content:'\2713';
+  display:inline-block;
+  vertical-align: top;
+  line-height: 1em;
+  font-size:2em;
+  width: 1em;
+  height:0.5em;
+  margin-right: 0.3em;
+  text-align: center;
+  color: green;
+}
+
+.model-body li:nth-child(even):before{
+  content:'\0058';
+  display:inline-block;
+  vertical-align: top;
+  line-height: 1em;
+  font-size:2em;
+  width: 1em;
+  height:0.5em;
+  margin-right: 0.3em;
+  text-align: center;
+  color: red;
+}
+
+.model p {
+    color : #000;
+    text-align:center ;
+}
+a.shower {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #04335a;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: 24px;
+  overflow: hidden;
+  transition: 0.5s;
+  color: black;
+  background: #2196f3;
+  box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 10px #2196f3;
+}
+</style>
+    </head>
+   <body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+       <?php include_once('includes/sidebar.php');error_reporting(0)?>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column"style="color:black;">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+<?php include_once('includes/topbar.php');error_reporting(0)?>
+                <!-- End of Topbar -->
+			
+			<a class="shower" href="#"> World Covid-19 Cases</a><br><br>
+        <div class="card" id="card1">
+            <div class= "card-header bg-primary text-white">Last 24 hourse Update</div>
+            <div class = "card-body">
+                <div id="profileDetails">
+                    <div id = "top10">
+                        <button onclick="getTopTenCountriesByDeath()" class="btn btn-danger">Top 10 Country By Death</button>
+                        <button onclick="getTopTenCountriesByTotal()" class="btn btn-primary">Top 10 Country By Total Cases</button>
+                        <button onclick="getTopTenCountriesByActive()" class="btn btn-info">Top 10 Country By Active Cases</button>
+                        <button onclick="someInfo()" class="btn btn-success">Some Prevention on Corona Virus</button>
+                    </div>
+                    
+                    <p><input type="text" id="myInput" onkeyup="filterTable()" placeholder="Filter by Country..." title="Type in a name"></p>
+                    <button class = "collapsible">World Summary</button>
+                    <div class="totalContent">
+                        <span id = "totalConfirmed"><br><br> Total Confirmed</span>
+                        <span id = "totalRecovered"><br><br> Total Recovered</span>
+                        <span id = "totalDeath"><br><br> Total Deaths</span>
+                    </div>
+                    <div class="totalContent1">
+                        <span id = "totalActive"><br><br> Total Active</span>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-primary text-white">
+                                <h6 class="modal-title">Top 10 Countries Info</h6>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+                            <div>
+                                <p>Click on circle to check details.</p>
+                            </div>
+                            <div id="chartContainer1" style="height: 450px; width: 100%;"></div>
+                            <div>
+                                <p>Click on box to check details.</p>
+                            </div>
+                            <div id="chartContainer2" style="height: 450px; width: 100%;"></div>
+                            <div>
+                                <p>Click on box to check details.</p>
+                            </div>
+                
+                            <!-- Modal footer -->
+                            <div class="modal-footer bg-info text-white">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" id="myModal1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-primary text-white">
+                                <h6 class="modal-title">Prevent the spread of COVID-19</h6>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class = "model-body">
+                                <ul>
+                                    <li>Wash your hands for at least 20 seconds, several times a day. Use soap and water or a hand sanitizer with at least 60% alcohol.</li>
+                                    <li>Don’t touch your eyes, nose or mouth.</li>
+                                    <li>Maintain a safe distance from anyone who is coughing or sneezing.</li>
+                                    <li>Don’t travel if you have a fever. If you get sick on flight, tell crew immediately. When you get home, contact a health professional.</li>
+                                    <li>Cover your nose and mouth with your bent elbow or a tissue when you cough or sneeze.</li>
+                                    <li>Don’t panic. Public health officials still say the risk of becoming infected with COVID-19 is low, but your risk level is likely to rise as the virus spreads across the country.</li>
+                                    <li>Stay home if you feel unwell.</li>
+                                    <li>Don’t skip the flu shot. The symptoms of COVID-19 and flu overlap enough that it can complicate diagnosis. If you’ve had a flu shot, you’re less likely to catch the flu or have a case serious enough to require treatment.</li>
+                                    <li>If you have a fever, a cough, and difficulty breathing, seek medical attention. Call in advance.</li>
+                                    <li>Don’t go to the doctor unless it’s urgent. And reschedule your dental cleaning. The CDC is urging all health care professionals to focus on emergency treatments now.</li>
+                                    <li>Follow the directions of your local health authority.</li>
+                                    <li>Don't go near seniors or those at higher risk for severe illness. You may be able to transmit the virus even if you feel fine. Now is not the time to pay a visit to grandma, or your friend with asthma.</li>
+                                    <li>Treat the sickness. Keep the sick person hydrated with plenty of fluids, and use over-the-counter medications for individual symptoms.</li>
+                                </ul>
+                            </div>
+                
+                            <!-- Modal footer -->
+                            
+                        </div>
+                    </div>
+                </div>
+       <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> 
+		
+		          
+          <footer class="py-4 bg-red">
+    <div class="container"">
+      <p class="m-0 text-center text-white"style="color:green;">Copyright &copy;2021Sun Healthcare All Rights Reserved </p>
+    </div>
+    <!-- /.container -->
+  </footer>
+ <!-- Bootstrap core JavaScript-->
+    
+ </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+           <?php include_once('includes/footer2.php');?>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+   
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+
+    </body>
+	
+
+<script>
+
+var countries = [];
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "navbar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar";
+  }
+}
+
+window.addEventListener('load', function() {
+    getDetails();
+});
+
+function getDetails() {
+    var link = 'https://pomber.github.io/covid19/timeseries.json';
+    
+    $(".loader").css("display", "block");
+    httpGet(link);
+}
+
+function httpGet(link) {
+    if(link !== null && link !== undefined && link !== "") {
+        $.ajax({
+            url: link,
+            success: function(data) {
+                //alert(data)
+                //document.getElementById("defaultOpen").click();
+                let items = Object.keys(data);
+                
+                var content = "";
+                var totalConfirmed  = 0;
+                var totalRecovered  = 0;
+                var totalDeath      = 0;
+                var totalActive     = 0;
+                
+                items.map(key => {
+                    let value = data[key];
+                    
+                    var confirmed   = 0;
+                    var recovered   = 0;
+                    var deaths      = 0;
+                    var active      = 0;
+                    
+                    Object.values(value).forEach(entry => {
+                        confirmed = entry['confirmed'];
+                        recovered = entry['recovered'];
+                        deaths    = entry['deaths'];
+                    });
+                    
+                    active = confirmed - recovered - deaths;
+                    
+                    var coutryWise  = {};
+                    
+                    coutryWise['country']       = key;
+                    coutryWise['confirmed']     = confirmed;
+                    coutryWise['recovered']     = recovered;
+                    coutryWise['deaths']        = deaths;
+                    coutryWise['active']        = active;
+                    
+                    countries.push(coutryWise);
+                    
+                    totalConfirmed += confirmed;
+                    totalRecovered += recovered;
+                    totalDeath     += deaths;
+                    totalActive    += active;
+                    
+                    content += '<div class = "datadiv"><button class="collapsible" style="background-color: '+ getRandomColor() +'"><b>'+ key +'</b></button><div class="content1"><span class="confirmed"><b>'+ confirmed +'</b><br><br> Confirmed</span><span class="recovered"><b>'+ recovered +'</b><br><br> Recovered</span><span class="death"><b>'+ deaths +'</b><br><br> Deaths</span><p>' + 
+active +'<br><br>Active</p><button id="' + key + '" onclick = "showGraph(this, '+ key +', '+ confirmed +','+recovered+','+deaths+')" class="btn btn-info">Display By Graph</button><div id = "chartContainer_' + key + '"></div></div></div>';
+                });
+                
+                $('#totalConfirmed').html('<b>' + totalConfirmed + '</b><br><br>Confirmed');
+                $('#totalRecovered').html('<b>' + totalRecovered + '</b><br><br>Recovered');
+                $('#totalDeath').html('<b>' + totalDeath + '</b><br><br>Deaths');
+                $('#totalActive').html('<b>' + totalActive + '</b><br><br>Active Cases (Confirmed - Recovered - Deaths)');
+               
+                $('#profileDetails').append(content);
+                
+               // applyCollapsible();
+                
+                $("#card1").css("display", "block");
+                $(".loader").css("display", "none");
+                $("body, html").css("background-color", "#ffffff");
+            },
+            error: function() {
+                alert("System seems to be offline, or your link is invalid. Be sure the link is correct, and try again later");
+            }
+        });
+    }
+}
+
+function applyCollapsible() {
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active2");
+        var content = this.nextElementSibling;
+        
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } 
+      });
+    }
+}
+
+function filterTable() {
+  var input, filter, table, tr, td, i, txtValue, confirmed, totalConfirmed=0, recovered, totalRecovered=0, death, totalDeath = 0, totalActive  = 0;;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myCodeTable");
+  tr = document.getElementsByClassName("datadiv");
+  
+  for (i = 0; i < tr.length; i++) {
+    td      = tr[i].getElementsByTagName("button")[0];
+    confirmed    = tr[i].getElementsByTagName("b")[1];
+    recovered    = tr[i].getElementsByTagName("b")[2];
+    death       = tr[i].getElementsByTagName("b")[3];
+   
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      
+      //console.log(txtValue.toUpperCase().indexOf(filter));
+      
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        
+        if(confirmed) {
+            totalConfirmed += Number(confirmed.innerText);
+        }
+        
+        if(recovered) {
+            totalRecovered += Number(recovered.innerText);
+        }
+        
+        if(death) {
+            totalDeath += Number(death.innerText);
+        }
+        
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+    
+  }
+  
+  totalActive   = totalConfirmed - totalRecovered - totalDeath;
+  
+    $('#totalConfirmed').html('<b>' + totalConfirmed + '</b><br><br>Confirmed');
+    $('#totalRecovered').html('<b>' + totalRecovered + '</b><br><br>Recovered');
+    $('#totalDeath').html('<b>' + totalDeath + '</b><br><br>Deaths');
+    $('#totalActive').html('<b>' + totalActive + '</b><br><br>Active Cases (Confirmed - Recovered - Deaths)');
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function getTopTenCountriesByDeath() {
+    countries.sort(function(a, b) {
+        return b.deaths - a.deaths
+    });
+    
+    var totalXP = [];
+
+    for(var j = 0; j < 10; j++) {
+        var obj1  = countries[j];
+                
+        totalXP.push({
+            label : obj1.country, y : obj1.deaths
+        });
+    }
+    
+    var options = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "doughnut",
+                innerRadius: "40%",
+                toolTipContent: "<b>{label}</b>: {y} (#percent%)",
+                indexLabelFontSize: 12,
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabel: "{label} (#percent%)",
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+    
+    var options1 = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "column",
+                indexLabelFontSize: 12,
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+    
+    var options2 = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "bar",
+                indexLabelFontSize: 12,
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+
+    $("#chartContainer").CanvasJSChart(options);
+    $("#chartContainer1").CanvasJSChart(options1);
+    $("#chartContainer2").CanvasJSChart(options2);
+    $(".modal-title").html("Top Ten Countries By Death");
+    $("#myModal").modal('show');
+}
+
+function getTopTenCountriesByTotal() {
+    countries.sort(function(a, b) {
+        return b.deaths - a.deaths
+    });
+    
+    var totalXP = [];
+
+    for(var j = 0; j < 10; j++) {
+        var obj1  = countries[j];
+                
+        totalXP.push({
+            label : obj1.country, y : obj1.confirmed
+        });
+    }
+    
+    var options = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "doughnut",
+                innerRadius: "40%",
+                toolTipContent: "<b>{label}</b>: {y} (#percent%)",
+                indexLabelFontSize: 12,
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabel: "{label} (#percent%)",
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+
+    var options1 = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "column",
+                indexLabelFontSize: 12,
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+    
+    var options2 = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "bar",
+                indexLabelFontSize: 12,
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+
+    $("#chartContainer").CanvasJSChart(options);
+    $("#chartContainer1").CanvasJSChart(options1);
+    $("#chartContainer2").CanvasJSChart(options2);
+    $(".modal-title").html("Top Ten Countries By Total Cases");
+    $("#myModal").modal('show');
+}
+
+function getTopTenCountriesByActive() {
+    countries.sort(function(a, b) {
+        return b.active - a.active
+    });
+    
+    var totalXP = [];
+
+    for(var j = 0; j < 10; j++) {
+        var obj1  = countries[j];
+                
+        totalXP.push({
+            label : obj1.country, y : obj1.active
+        });
+    }
+    
+    var options = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "doughnut",
+                innerRadius: "40%",
+                toolTipContent: "<b>{label}</b>: {y} (#percent%)",
+                indexLabelFontSize: 12,
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabel: "{label} (#percent%)",
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+
+    var options1 = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "column",
+                indexLabelFontSize: 12,
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+    
+    var options2 = {
+        theme: "dark2",
+        width: 450,
+        animationEnabled: true,
+        legend: {
+            maxWidth: 350,
+            itemWidth: 120
+        },
+
+        data: [{
+                type: "bar",
+                indexLabelFontSize: 12,
+                //yValueFormatString: "#,##0,,.## Million",
+                dataPoints: totalXP
+        }]
+    };
+
+    $("#chartContainer").CanvasJSChart(options);
+    $("#chartContainer1").CanvasJSChart(options1);
+    $("#chartContainer2").CanvasJSChart(options2);
+    $(".modal-title").html("Top Ten Countries By Active Cases");
+    $("#myModal").modal('show');
+}
+
+function someInfo() {
+    $(".modal-title").html("Some prevention on Corona Virus");
+    $("#myModal1").modal('show');
+}
+
+function showGraph(obj, cnt, confirmed, recovered, deaths) {
+    
+    if(obj.id) {
+        var active = confirmed - recovered - deaths;
+        
+        var totalXP = [];
+
+       totalXP.push({label : 'Confirmed', y : confirmed});
+       totalXP.push({label : 'Recovered', y : recovered});
+       totalXP.push({label : 'Deaths', y : deaths});
+       totalXP.push({label : 'Active', y : active});
+        
+        var options = {
+            //theme: "dark2",
+            width: 400,
+            animationEnabled: true,
+            legend: {
+                maxWidth: 350,
+                itemWidth: 120
+            },
+    
+            data: [{
+                    type: "doughnut",
+                    innerRadius: "40%",
+                    toolTipContent: "<b>{label}</b>: {y} (#percent%)",
+                    indexLabelFontSize: 12,
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabel: "{label} (#percent%)",
+                    //yValueFormatString: "#,##0,,.## Million",
+                    dataPoints: totalXP
+            }]
+        };
+        
+        var options1 = {
+            //theme: "dark2",
+            width: 400,
+            animationEnabled: true,
+            legend: {
+                maxWidth: 350
+            },
+    
+            data: [{
+                    type: "column",
+                    //yValueFormatString: "#,##0,,.## Million",
+                    dataPoints: totalXP
+            }]
+        };
+        
+        var options2 = {
+            //theme: "dark2",
+            width: 400,
+            animationEnabled: true,
+            legend: {
+                maxWidth: 350
+            },
+    
+            data: [{
+                    type: "bar",
+                    //yValueFormatString: "#,##0,,.## Million",
+                    dataPoints: totalXP
+            }]
+        };
+
+        $("#chartContainer").CanvasJSChart(options);
+        $("#chartContainer1").CanvasJSChart(options1);
+        $("#chartContainer2").CanvasJSChart(options2);
+        $(".modal-title").html(obj.id);
+        $("#myModal").modal('show');
+    }
+}
+</script>
+</html>
+<?php } ?>
